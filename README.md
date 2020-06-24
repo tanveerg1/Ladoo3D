@@ -1,4 +1,4 @@
 # Ladoo3D
 
 Ladoo3D Engine
-inspired by Hazel Engine Series
+based on Hazel Engine Series
