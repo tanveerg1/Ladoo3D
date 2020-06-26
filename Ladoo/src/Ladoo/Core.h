@@ -5,7 +5,9 @@
 		#define LADOO_API __declspec(dllexport)
 	#else
 		#define LADOO_API __declspec(dllimport)
-	#endif // LD_BUILD_DLL
+	#endif 
 #else
 	#error Have some ladoos!
 #endif
+
+#define BIT(x) (1 << x)

@@ -1,0 +1,3 @@
+[submodule "Ladoo/vendor/spdlog"]
+	path = Ladoo/vendor/spdlog
+	url = https://github.com/gabime/spdlog

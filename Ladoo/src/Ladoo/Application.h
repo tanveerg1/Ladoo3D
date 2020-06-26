@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core.h"
+#include "Ladoo/Core.h"
+#include "Ladoo/Events/Event.h"
 
 namespace Ladoo {
 
