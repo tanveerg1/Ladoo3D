@@ -1,3 +1,6 @@
 [submodule "Ladoo/vendor/spdlog"]
 	path = Ladoo/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Ladoo/vendor/GLFW"]
+	path = Ladoo/vendor/GLFW
+	url = https://github.com/TheCherno/glfw

@@ -1,8 +1,10 @@
-# Directories
-.vs/
-bin/
-bin-int/
+# Binaries
+**/bin/
 !vendor/bin/premake/
+bin-int/
 
 # Files
 *.user
+
+# VS Files and Folders
+.vs/
