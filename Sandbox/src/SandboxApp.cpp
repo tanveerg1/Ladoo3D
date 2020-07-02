@@ -9,12 +9,22 @@ public:
 
 	void OnUpdate() override
 	{
-		LD_INFO("ExampleLayer::Update");
+		//LD_INFO("ExampleLayer::Update");
+
+		if (Ladoo::Input::IsKeyPressed(LD_KEY_TAB))
+		{
+			LD_INFO("Tab key is pressed");
+		}
 	}
 
 	void OnEvent(Ladoo::Event& event) override
 	{
-		LD_TRACE("{0}", event);
+		//LD_TRACE("{0}", event);
+		if (event.GetEventType() == Ladoo::EventType::KeyPressed)
+		{
+			Ladoo::KeyPressedEvent& e = (Ladoo::KeyPressedEvent&)event;
+			LD_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 
@@ -24,6 +34,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
+		PushOverlay(new Ladoo::ImGuiLayer());
 	}
 
 	~Sandbox()

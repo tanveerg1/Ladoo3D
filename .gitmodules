@@ -4,3 +4,6 @@
 [submodule "Ladoo/vendor/GLFW"]
 	path = Ladoo/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
+[submodule "Ladoo/vendor/imgui"]
+	path = Ladoo/vendor/imgui
+	url = https://github.com/tanveerg1/imgui

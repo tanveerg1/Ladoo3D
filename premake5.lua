@@ -1,5 +1,6 @@
 workspace "Ladoo"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations { "Debug", "Release", "Dist" }
 
@@ -8,14 +9,17 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Ladoo/vendor/GLFW/include"
 IncludeDir["Glad"] = "Ladoo/vendor/Glad/include"
+IncludeDir["ImGui"] = "Ladoo/vendor/imgui"
 
 include "Ladoo/vendor/GLFW" 
 include "Ladoo/vendor/Glad" 
+include "Ladoo/vendor/imgui" 
 
 project "Ladoo"
 	location "Ladoo"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -25,38 +29,38 @@ project "Ladoo"
 
 	files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
 
-	includedirs { "%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}" }
+	includedirs { "%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}", "%{IncludeDir.ImGui}" }
 	
-	links { "GLFW", "Glad", "opengl32.lib" }
+	links { "GLFW", "Glad", "ImGui", "opengl32.lib" }
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines { "LD_PLATFORM_WINDOWS", "LD_BUILD_DLL", "GLFW_INCLUDE_NONE" }
 
-		postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox") }
+		postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"") }
 
 	filter "configurations:Debug"
 		defines "LD_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LD_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "LD_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -69,22 +73,21 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines { "LD_PLATFORM_WINDOWS" }
 
 	filter "configurations:Debug"
 		defines "LD_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "LD_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "LD_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
