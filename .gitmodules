@@ -7,3 +7,6 @@
 [submodule "Ladoo/vendor/imgui"]
 	path = Ladoo/vendor/imgui
 	url = https://github.com/tanveerg1/imgui
+[submodule "Ladoo/vendor/glm"]
+	path = Ladoo/vendor/glm
+	url = https://github.com/g-truc/glm
