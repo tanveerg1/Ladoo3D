@@ -17,6 +17,9 @@ namespace Ladoo {
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -26,13 +29,13 @@ namespace Ladoo {
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
-		layer->OnAttach();
+		//layer->OnAttach();
 	}
 
-	void Application::PushOverlay(Layer* overlay)
+	void Application::PushOverlay(Layer* layer)
 	{
-		m_LayerStack.PushOverlay(overlay);
-		overlay->OnAttach();
+		m_LayerStack.PushOverlay(layer);
+		//layer->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)
@@ -63,8 +66,12 @@ namespace Ladoo {
 				layer->OnUpdate();
 			}
 
-			//auto [x, y] = Input::GetMousePostion();
-			//LD_CORE_TRACE("{0}, {1}", x, y);
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+			{
+				layer->OnImGuiRender();
+			}
+			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
 		}

@@ -19,7 +19,7 @@ namespace Ladoo {
 	};
 
 	// Interface for Desktop systems
-	class LADOO_API Window
+	class  Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

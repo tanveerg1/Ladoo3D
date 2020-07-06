@@ -8,3 +8,7 @@ bin-int/
 
 # VS Files and Folders
 .vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user

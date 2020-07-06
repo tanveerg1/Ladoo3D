@@ -6,7 +6,7 @@
 
 namespace Ladoo {
 
-	class LADOO_API Log
+	class  Log
 	{
 	public:
 		static void Init();

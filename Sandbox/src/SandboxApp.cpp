@@ -1,5 +1,7 @@
 #include <Ladoo.h>
 
+#include <imgui/imgui.h>
+
 class ExampleLayer : public Ladoo::Layer 
 {
 public:
@@ -15,6 +17,15 @@ public:
 		{
 			LD_INFO("Tab key is pressed");
 		}
+		
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
+
 	}
 
 	void OnEvent(Ladoo::Event& event) override
@@ -34,7 +45,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Ladoo::ImGuiLayer());
+		//PushOverlay(new Ladoo::ImGuiLayer());
 	}
 
 	~Sandbox()

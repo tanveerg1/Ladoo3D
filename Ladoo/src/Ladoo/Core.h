@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef LD_PLATFORM_WINDOWS
+#if LD_DYNAMIC_LINK
 	#ifdef LD_BUILD_DLL
 		#define LADOO_API __declspec(dllexport)
 	#else
 		#define LADOO_API __declspec(dllimport)
 	#endif 
+#else
+	#define LADOO_API
+#endif
 #else
 	#error Have some ladoos!
 #endif

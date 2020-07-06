@@ -10,16 +10,20 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Ladoo/vendor/GLFW/include"
 IncludeDir["Glad"] = "Ladoo/vendor/Glad/include"
 IncludeDir["ImGui"] = "Ladoo/vendor/imgui"
+IncludeDir["glm"] = "Ladoo/vendor/glm"
 
-include "Ladoo/vendor/GLFW" 
-include "Ladoo/vendor/Glad" 
-include "Ladoo/vendor/imgui" 
+group "Dependencies"
+	include "Ladoo/vendor/GLFW" 
+	include "Ladoo/vendor/Glad" 
+	include "Ladoo/vendor/imgui"
+group ""
 
 project "Ladoo"
 	location "Ladoo"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -27,52 +31,51 @@ project "Ladoo"
 	pchheader "ldpch.h"
 	pchsource "Ladoo/src/ldpch.cpp"
 
-	files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
+	files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp", "%{prj.name}/vendor/glm/glm/**.hpp", "%{prj.name}/vendor/glm/glm/**.inl" }
 
-	includedirs { "%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}", "%{IncludeDir.ImGui}" }
+	defines { "_CRT_SECURE_NO_WARNINGS" }
+	
+	includedirs { "%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}", "%{IncludeDir.ImGui}", "%{IncludeDir.glm}" }
 	
 	links { "GLFW", "Glad", "ImGui", "opengl32.lib" }
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines { "LD_PLATFORM_WINDOWS", "LD_BUILD_DLL", "GLFW_INCLUDE_NONE" }
 
-		postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"") }
-
 	filter "configurations:Debug"
 		defines "LD_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "LD_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "LD_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
 
-	includedirs { "Ladoo/vendor/spdlog/include", "Ladoo/src" }
+	includedirs { "Ladoo/vendor/spdlog/include", "Ladoo/src", "Ladoo/vendor", "%{IncludeDir.glm}" }
 
 	links { "Ladoo" }
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines { "LD_PLATFORM_WINDOWS" }
@@ -80,14 +83,14 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "LD_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "LD_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "LD_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"

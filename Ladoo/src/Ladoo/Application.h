@@ -1,15 +1,16 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
+#include "Ladoo/Events/Event.h"
 #include "Ladoo/Events/ApplicationEvent.h"
 #include "Window.h"
 #include "Ladoo/LayerStack.h"
+#include "Ladoo/ImGui/ImGuiLayer.h"
 
 
 namespace Ladoo {
 
-	class LADOO_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -20,7 +21,7 @@ namespace Ladoo {
 		void OnEvent(Event& e);
 
 		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* overlay);
+		void PushOverlay(Layer* layer);
 
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
@@ -28,6 +29,7 @@ namespace Ladoo {
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 	private:
