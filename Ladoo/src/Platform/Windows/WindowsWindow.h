@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Ladoo/Window.h"
+#include "Ladoo/Renderer/RendererContext.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Ladoo {
@@ -16,7 +18,7 @@ namespace Ladoo {
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
 
-		// attribures
+		// attributes
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
@@ -27,6 +29,7 @@ namespace Ladoo {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		RendererContext* m_Context;
 
 		struct WindowData
 		{

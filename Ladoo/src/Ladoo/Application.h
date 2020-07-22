@@ -7,7 +7,6 @@
 #include "Ladoo/LayerStack.h"
 #include "Ladoo/ImGui/ImGuiLayer.h"
 
-
 namespace Ladoo {
 
 	class Application

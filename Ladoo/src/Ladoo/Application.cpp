@@ -3,7 +3,7 @@
 
 #include "Input.h"
 
-#include <glad/glad.h>
+#include "Ladoo/Renderer/Renderer.h"
 
 namespace Ladoo {
 
@@ -20,6 +20,7 @@ namespace Ladoo {
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
+
 	}
 
 	Application::~Application()
@@ -58,8 +59,6 @@ namespace Ladoo {
 
 		while (m_Running)
 		{
-			glClearColor(1, 0, 1, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
 
 			for (Layer* layer : m_LayerStack)
 			{

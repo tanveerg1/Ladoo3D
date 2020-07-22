@@ -10,6 +10,21 @@
 #include "Ladoo/MouseCodes.h"
 #include "Ladoo/KeyCodes.h"
 
+// Renderer
+#include "Ladoo/Renderer/Renderer.h"
+#include "Ladoo/Renderer/RendererCommand.h"
+//---------------------------------------
+
+// Camera
+#include "Ladoo/Renderer/OrthographicCamera.h"
+// ---------------------------------------
+
+// Buffer and stuff
+#include "Ladoo/Renderer/Buffer.h"
+#include "Ladoo/Renderer/Shader.h"
+#include "Ladoo/Renderer/VertexArray.h"
+//----------------------------------------
+
 // ------Entry Point----------------------
 #include "Ladoo/EntryPoint.h"
 // ---------------------------------------
