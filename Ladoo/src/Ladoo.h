@@ -10,6 +10,8 @@
 #include "Ladoo/MouseCodes.h"
 #include "Ladoo/KeyCodes.h"
 
+#include "Ladoo/Base/TimeStep.h"
+
 // Renderer
 #include "Ladoo/Renderer/Renderer.h"
 #include "Ladoo/Renderer/RendererCommand.h"

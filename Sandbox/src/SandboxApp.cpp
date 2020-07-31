@@ -1,6 +1,11 @@
 #include <Ladoo.h>
 
-#include <imgui/imgui.h>
+#include "Platform/OpenGL/OpenGLShader.h"
+
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Ladoo::Layer 
 {
@@ -16,7 +21,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f
 		};
 
-		std::shared_ptr<Ladoo::VertexBuffer> m_VertexBuffer;
+		Ladoo::Ref<Ladoo::VertexBuffer> m_VertexBuffer;
 		m_VertexBuffer.reset(Ladoo::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		Ladoo::BufferLayout layout = {
@@ -29,19 +34,19 @@ public:
 		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Ladoo::IndexBuffer> m_IndexBuffer;
+		Ladoo::Ref<Ladoo::IndexBuffer> m_IndexBuffer;
 		m_IndexBuffer.reset(Ladoo::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 
 		m_VertexArray->AddIndexBuffer(m_IndexBuffer);
 
 		sq_VertexArray.reset(Ladoo::VertexArray::Create());
 		float sqVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
 		};
-		std::shared_ptr<Ladoo::VertexBuffer> squareVB;
+		Ladoo::Ref<Ladoo::VertexBuffer> squareVB;
 		squareVB.reset(Ladoo::VertexBuffer::Create(sqVertices, sizeof(sqVertices)));
 		squareVB->SetLayout({
 			{ Ladoo::ShaderDataType::Float3, "a_Position"},
@@ -49,7 +54,7 @@ public:
 		sq_VertexArray->AddVertexBuffer(squareVB);
 
 		uint32_t sq_Indices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Ladoo::IndexBuffer> squareIB;
+		Ladoo::Ref<Ladoo::IndexBuffer> squareIB;
 		squareIB.reset(Ladoo::IndexBuffer::Create(sq_Indices, sizeof(sq_Indices) / sizeof(uint32_t)));
 
 		sq_VertexArray->AddIndexBuffer(squareIB);
@@ -61,6 +66,7 @@ public:
 			layout(location = 1) in vec4 a_Colour;
 			
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Colour;			
@@ -69,7 +75,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Colour = a_Colour;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			}
 		
 		)";
@@ -91,66 +97,69 @@ public:
 
 		m_Shader.reset(Ladoo::Shader::Create(vertexSrc, fragmentSrc));
 
-		std::string blueVertexSrc = R"(
+		std::string flatColourVertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjection;			
+			uniform mat4 u_Transform;			
 
 			out vec3 v_Position;		
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			}
 		
 		)";
 
-		std::string blueFragmentSrc = R"(
+		std::string flatColourFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 f_Colour;
 
 			in vec3 v_Position;
 
+			uniform vec3 u_Colour;
+
 			void main()
 			{
-				f_Colour = vec4(0.2, 0.3, 0.8, 1.0);
+				f_Colour = vec4(u_Colour, 1.0);
 			}
 		)";
 
-		blue_Shader.reset(Ladoo::Shader::Create(blueVertexSrc, blueFragmentSrc));
+		flatColour_Shader.reset(Ladoo::Shader::Create(flatColourVertexSrc, flatColourFragmentSrc));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Ladoo::TimeStep timeStep) override
 	{
 		if (Ladoo::Input::IsKeyPressed(LD_KEY_LEFT))
 		{
-			m_CameraPosition.x -= m_CameraSpeed;
+			m_CameraPosition.x -= m_CameraSpeed * timeStep;
 		}
 		else if (Ladoo::Input::IsKeyPressed(LD_KEY_RIGHT))
 		{
-			m_CameraPosition.x += m_CameraSpeed;
+			m_CameraPosition.x += m_CameraSpeed * timeStep;
 		}
 
 		if (Ladoo::Input::IsKeyPressed(LD_KEY_UP))
 		{
-			m_CameraPosition.y += m_CameraSpeed;
+			m_CameraPosition.y += m_CameraSpeed * timeStep;
 		}
 		else if (Ladoo::Input::IsKeyPressed(LD_KEY_DOWN))
 		{
-			m_CameraPosition.y -= m_CameraSpeed;
+			m_CameraPosition.y -= m_CameraSpeed * timeStep;
 		}
 
 		if (Ladoo::Input::IsKeyPressed(LD_KEY_A))
 		{
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * timeStep;
 		}
 		if (Ladoo::Input::IsKeyPressed(LD_KEY_D))
 		{
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * timeStep;
 		}
 
 		Ladoo::RendererCommand::SetClearColour({ 0.1f, 0.1f, 0.1f, 1 });
@@ -161,7 +170,21 @@ public:
 
 		Ladoo::Renderer::BeginScene(m_Camera);
 
-		Ladoo::Renderer::Submit(blue_Shader, sq_VertexArray);
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+		std::dynamic_pointer_cast<Ladoo::OpenGLShader>(flatColour_Shader)->Bind();
+		std::dynamic_pointer_cast<Ladoo::OpenGLShader>(flatColour_Shader)->UploadUniformFloat3("u_Colour", m_SquareColour);
+
+		for (int y = 0; y < 20; y++)
+		{
+			for (int x = 0; x < 20; x++)
+			{
+				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				Ladoo::Renderer::Submit(flatColour_Shader, sq_VertexArray, transform);
+			}
+		}
+		
 		Ladoo::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Ladoo::Renderer::EndScene();
@@ -169,7 +192,11 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
+		ImGui::Begin("Settings");
+		
+		ImGui::ColorEdit3("Square Colour", glm::value_ptr(m_SquareColour));
 
+		ImGui::End();
 	}
 
 	void OnEvent(Ladoo::Event& event) override
@@ -177,18 +204,20 @@ public:
 	}
 
 private:
-	std::shared_ptr<Ladoo::Shader> m_Shader;
-	std::shared_ptr<Ladoo::VertexArray> m_VertexArray;
+	Ladoo::Ref<Ladoo::Shader> m_Shader;
+	Ladoo::Ref<Ladoo::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Ladoo::Shader> blue_Shader;
-	std::shared_ptr<Ladoo::VertexArray> sq_VertexArray;
+	Ladoo::Ref<Ladoo::Shader> flatColour_Shader;
+	Ladoo::Ref<Ladoo::VertexArray> sq_VertexArray;
 
 	Ladoo::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
-	float m_CameraSpeed = 0.1f;
 
+	float m_CameraSpeed = 5.0f;
 	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 2.0f;
+	float m_CameraRotationSpeed = 180.0f;
+
+	glm::vec3 m_SquareColour = { 0.2f, 0.3f, 0.8f };
 };
 
 

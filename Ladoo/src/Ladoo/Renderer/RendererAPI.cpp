@@ -13,7 +13,7 @@ namespace Ladoo {
 	{
 	}
 
-	void RendererAPI::DrawElements(const std::shared_ptr<VertexArray>& vertexArray)
+	void RendererAPI::DrawElements(const Ref<VertexArray>& vertexArray)
 	{
 	}
 }

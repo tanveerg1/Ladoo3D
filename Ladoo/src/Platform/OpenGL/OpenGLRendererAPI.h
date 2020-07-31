@@ -10,7 +10,7 @@ namespace Ladoo {
 		virtual void SetClearColour(const glm::vec4& colour) override;
 		virtual void Clear() override;
 
-		virtual void DrawElements(const std::shared_ptr<VertexArray>& vertexArray) override;
+		virtual void DrawElements(const Ref<VertexArray>& vertexArray) override;
 	};
 }
 

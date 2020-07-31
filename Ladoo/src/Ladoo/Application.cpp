@@ -4,6 +4,7 @@
 #include "Input.h"
 
 #include "Ladoo/Renderer/Renderer.h"
+#include "GLFW/glfw3.h"
 
 namespace Ladoo {
 
@@ -59,10 +60,13 @@ namespace Ladoo {
 
 		while (m_Running)
 		{
+			float time = (float)glfwGetTime();
+			TimeStep timeStep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 
 			for (Layer* layer : m_LayerStack)
 			{
-				layer->OnUpdate();
+				layer->OnUpdate(timeStep);
 			}
 
 			m_ImGuiLayer->Begin();

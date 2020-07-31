@@ -17,7 +17,7 @@ namespace Ladoo {
 			s_RendererAPI->Clear();
 		}
 
-		inline static void DrawElements(const std::shared_ptr<VertexArray>& vertexArray)
+		inline static void DrawElements(const Ref<VertexArray>& vertexArray)
 		{
 			s_RendererAPI->DrawElements(vertexArray);
 		}

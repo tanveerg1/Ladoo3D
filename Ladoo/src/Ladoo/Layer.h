@@ -2,6 +2,7 @@
 
 #include "Ladoo/Core.h"
 #include "Ladoo/Events/Event.h"
+#include "Ladoo/Base/TimeStep.h"
 
 namespace Ladoo {
 
@@ -13,7 +14,7 @@ namespace Ladoo {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(TimeStep timeStep) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

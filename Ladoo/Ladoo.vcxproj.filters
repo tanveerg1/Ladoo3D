@@ -1336,6 +1336,7 @@
     <ClInclude Include="src\Ladoo\Renderer\RendererCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Ladoo\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Ladoo\Base\TimeStep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ladoo\Application.cpp">

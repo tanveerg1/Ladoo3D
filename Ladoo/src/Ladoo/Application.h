@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Ladoo/LayerStack.h"
 #include "Ladoo/ImGui/ImGuiLayer.h"
+#include "Ladoo/Base/TimeStep.h"
 
 namespace Ladoo {
 
@@ -31,6 +32,7 @@ namespace Ladoo {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime = 0.0f;
 	private:
 		static Application* s_Instance;
 	};
