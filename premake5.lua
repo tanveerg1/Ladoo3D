@@ -11,6 +11,7 @@ IncludeDir["GLFW"] = "Ladoo/vendor/GLFW/include"
 IncludeDir["Glad"] = "Ladoo/vendor/Glad/include"
 IncludeDir["ImGui"] = "Ladoo/vendor/imgui"
 IncludeDir["glm"] = "Ladoo/vendor/glm"
+IncludeDir["stb_image"] = "Ladoo/vendor/stb_image"
 
 group "Dependencies"
 	include "Ladoo/vendor/GLFW" 
@@ -31,11 +32,19 @@ project "Ladoo"
 	pchheader "ldpch.h"
 	pchsource "Ladoo/src/ldpch.cpp"
 
-	files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp", "%{prj.name}/vendor/glm/glm/**.hpp", "%{prj.name}/vendor/glm/glm/**.inl" }
+	files 
+	{ 
+		"%{prj.name}/src/**.h", 
+		"%{prj.name}/src/**.cpp", 
+		"%{prj.name}/vendor/stb_image/**.h", 
+		"%{prj.name}/vendor/stb_image/**.cpp", 
+		"%{prj.name}/vendor/glm/glm/**.hpp", 
+		"%{prj.name}/vendor/glm/glm/**.inl" 
+	}
 
 	defines { "_CRT_SECURE_NO_WARNINGS" }
 	
-	includedirs { "%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}", "%{IncludeDir.ImGui}", "%{IncludeDir.glm}" }
+	includedirs { "%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}", "%{IncludeDir.ImGui}", "%{IncludeDir.glm}", "%{IncludeDir.stb_image}" }
 	
 	links { "GLFW", "Glad", "ImGui", "opengl32.lib" }
 

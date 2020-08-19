@@ -24,6 +24,7 @@
 // Buffer and stuff
 #include "Ladoo/Renderer/Buffer.h"
 #include "Ladoo/Renderer/Shader.h"
+#include "Ladoo/Renderer/Texture.h"
 #include "Ladoo/Renderer/VertexArray.h"
 //----------------------------------------
 

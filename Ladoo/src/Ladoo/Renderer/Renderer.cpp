@@ -7,6 +7,11 @@ namespace Ladoo {
 
 	Renderer::SceneData* Renderer::c_SceneData = new Renderer::SceneData;
 
+	void Renderer::Init()
+	{
+		RendererCommand::Init();
+	}
+
 	void Renderer::BeginScene(OrthographicCamera& camera)
 	{
 		c_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();

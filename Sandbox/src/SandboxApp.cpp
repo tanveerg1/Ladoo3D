@@ -40,16 +40,17 @@ public:
 		m_VertexArray->AddIndexBuffer(m_IndexBuffer);
 
 		sq_VertexArray.reset(Ladoo::VertexArray::Create());
-		float sqVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float sqVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
 		};
 		Ladoo::Ref<Ladoo::VertexBuffer> squareVB;
 		squareVB.reset(Ladoo::VertexBuffer::Create(sqVertices, sizeof(sqVertices)));
 		squareVB->SetLayout({
 			{ Ladoo::ShaderDataType::Float3, "a_Position"},
+			{ Ladoo::ShaderDataType::Float2, "a_TextureCoord"},
 			});
 		sq_VertexArray->AddVertexBuffer(squareVB);
 
@@ -95,7 +96,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Ladoo::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = (Ladoo::Shader::Create("VertexColourTriangle", vertexSrc, fragmentSrc));
 
 		std::string flatColourVertexSrc = R"(
 			#version 330 core
@@ -130,7 +131,15 @@ public:
 			}
 		)";
 
-		flatColour_Shader.reset(Ladoo::Shader::Create(flatColourVertexSrc, flatColourFragmentSrc));
+		flatColour_Shader = (Ladoo::Shader::Create("FlatColourShader", flatColourVertexSrc, flatColourFragmentSrc));
+
+		auto texture_Shader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
+
+		m_Texture = (Ladoo::Texture2D::Create("assets/textures/Checkerboard.png"));
+		m_TestTexture = (Ladoo::Texture2D::Create("assets/textures/ChernoLogo.png"));
+
+		std::dynamic_pointer_cast<Ladoo::OpenGLShader>(texture_Shader)->Bind();
+		std::dynamic_pointer_cast<Ladoo::OpenGLShader>(texture_Shader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Ladoo::TimeStep timeStep) override
@@ -184,8 +193,16 @@ public:
 				Ladoo::Renderer::Submit(flatColour_Shader, sq_VertexArray, transform);
 			}
 		}
-		
-		Ladoo::Renderer::Submit(m_Shader, m_VertexArray);
+		auto texture_Shader = m_ShaderLibrary.Get("Texture");
+
+		m_Texture->Bind();
+		Ladoo::Renderer::Submit(texture_Shader, sq_VertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		m_TestTexture->Bind();
+		Ladoo::Renderer::Submit(texture_Shader, sq_VertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		//Triangle
+		//Ladoo::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Ladoo::Renderer::EndScene();
 	}
@@ -204,11 +221,14 @@ public:
 	}
 
 private:
+	Ladoo::ShaderLibrary m_ShaderLibrary;
 	Ladoo::Ref<Ladoo::Shader> m_Shader;
 	Ladoo::Ref<Ladoo::VertexArray> m_VertexArray;
 
 	Ladoo::Ref<Ladoo::Shader> flatColour_Shader;
 	Ladoo::Ref<Ladoo::VertexArray> sq_VertexArray;
+
+	Ladoo::Ref<Ladoo::Texture2D> m_Texture, m_TestTexture;
 
 	Ladoo::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
