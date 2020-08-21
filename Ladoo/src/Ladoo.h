@@ -2,13 +2,13 @@
 
 // For use by Ladoo application
 
-#include "Ladoo/Application.h"
-#include "Ladoo/Layer.h"
-#include "Ladoo/Log.h"
+#include "Ladoo/Base/Application.h"
+#include "Ladoo/Base/Layer.h"
+#include "Ladoo/Base/Log.h"
 #include "Ladoo/ImGui/ImGuiLayer.h"
-#include "Ladoo/Input.h"
-#include "Ladoo/MouseCodes.h"
-#include "Ladoo/KeyCodes.h"
+#include "Ladoo/Base/Input.h"
+#include "Ladoo/Base/MouseCodes.h"
+#include "Ladoo/Base/KeyCodes.h"
 
 #include "Ladoo/Base/TimeStep.h"
 
@@ -30,5 +30,5 @@
 //----------------------------------------
 
 // ------Entry Point----------------------
-#include "Ladoo/EntryPoint.h"
+#include "Ladoo/Base/EntryPoint.h"
 // ---------------------------------------

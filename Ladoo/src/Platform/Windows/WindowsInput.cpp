@@ -1,7 +1,7 @@
 #include "ldpch.h"
 #include "WindowsInput.h"
 
-#include "Ladoo/Application.h"
+#include "Ladoo/Base/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Ladoo {

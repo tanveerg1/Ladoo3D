@@ -18,6 +18,9 @@ namespace Ladoo {
 
 		OrthographicCamera& GetCamera() { return camera; }
 		const OrthographicCamera& GetCamera() const { return camera; }
+
+		float GetZoomLevel() { return c_ZoomLevel; }
+		void SetZoomLevel(float level) { c_ZoomLevel = level; }
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& e);
 		bool OnWindowResized(WindowResizeEvent& e);

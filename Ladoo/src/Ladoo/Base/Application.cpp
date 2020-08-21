@@ -46,6 +46,7 @@ namespace Ladoo {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
@@ -66,11 +67,14 @@ namespace Ladoo {
 			TimeStep timeStep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
-			for (Layer* layer : m_LayerStack)
+			if (!m_Minimized)
 			{
-				layer->OnUpdate(timeStep);
+				for (Layer* layer : m_LayerStack)
+				{
+					layer->OnUpdate(timeStep);
+				}
 			}
-
+			
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
 			{
@@ -86,6 +90,20 @@ namespace Ladoo {
 	{
 		m_Running = false;
 		return true;
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0)
+		{
+			m_Minimized = true;
+			return false;
+		}
+
+		m_Minimized = false;
+		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
+		return false;
 	}
 
 }

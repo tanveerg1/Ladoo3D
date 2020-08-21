@@ -3,7 +3,7 @@
 #include "ldpch.h"
 
 #include "Core.h"
-#include "Events/Event.h"
+#include "Ladoo/Events/Event.h"
 
 namespace Ladoo {
 

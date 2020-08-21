@@ -2,7 +2,7 @@
 
 #include "ldpch.h"
 
-#include "Ladoo/Core.h"
+#include "Ladoo/Base/Core.h"
 
 namespace Ladoo {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Ladoo/Core.h"
+#include "Ladoo/Base/Core.h"
 #include "Ladoo/Events/Event.h"
 #include "Ladoo/Base/TimeStep.h"
 

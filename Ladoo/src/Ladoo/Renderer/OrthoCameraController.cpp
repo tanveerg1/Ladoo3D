@@ -1,8 +1,8 @@
 #include "ldpch.h"
 #include "OrthoCameraController.h"
 
-#include "Ladoo/Input.h"
-#include "Ladoo/KeyCodes.h"
+#include "Ladoo/Base/Input.h"
+#include "Ladoo/Base/KeyCodes.h"
 
 namespace Ladoo {
 

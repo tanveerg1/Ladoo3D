@@ -141,21 +141,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Ladoo.h" />
-    <ClInclude Include="src\Ladoo\Application.h" />
+    <ClInclude Include="src\Ladoo\Base\Application.h" />
+    <ClInclude Include="src\Ladoo\Base\Core.h" />
+    <ClInclude Include="src\Ladoo\Base\EntryPoint.h" />
+    <ClInclude Include="src\Ladoo\Base\Input.h" />
+    <ClInclude Include="src\Ladoo\Base\KeyCodes.h" />
+    <ClInclude Include="src\Ladoo\Base\Layer.h" />
+    <ClInclude Include="src\Ladoo\Base\LayerStack.h" />
+    <ClInclude Include="src\Ladoo\Base\Log.h" />
+    <ClInclude Include="src\Ladoo\Base\MouseCodes.h" />
     <ClInclude Include="src\Ladoo\Base\TimeStep.h" />
-    <ClInclude Include="src\Ladoo\Core.h" />
-    <ClInclude Include="src\Ladoo\EntryPoint.h" />
+    <ClInclude Include="src\Ladoo\Base\Window.h" />
     <ClInclude Include="src\Ladoo\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Ladoo\Events\Event.h" />
     <ClInclude Include="src\Ladoo\Events\KeyEvent.h" />
     <ClInclude Include="src\Ladoo\Events\MouseEvent.h" />
     <ClInclude Include="src\Ladoo\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Ladoo\Input.h" />
-    <ClInclude Include="src\Ladoo\KeyCodes.h" />
-    <ClInclude Include="src\Ladoo\Layer.h" />
-    <ClInclude Include="src\Ladoo\LayerStack.h" />
-    <ClInclude Include="src\Ladoo\Log.h" />
-    <ClInclude Include="src\Ladoo\MouseCodes.h" />
     <ClInclude Include="src\Ladoo\Renderer\Buffer.h" />
     <ClInclude Include="src\Ladoo\Renderer\OrthoCameraController.h" />
     <ClInclude Include="src\Ladoo\Renderer\OrthographicCamera.h" />
@@ -166,7 +167,6 @@
     <ClInclude Include="src\Ladoo\Renderer\Shader.h" />
     <ClInclude Include="src\Ladoo\Renderer\Texture.h" />
     <ClInclude Include="src\Ladoo\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Ladoo\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -587,12 +587,12 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Ladoo\Application.cpp" />
+    <ClCompile Include="src\Ladoo\Base\Application.cpp" />
+    <ClCompile Include="src\Ladoo\Base\Layer.cpp" />
+    <ClCompile Include="src\Ladoo\Base\LayerStack.cpp" />
+    <ClCompile Include="src\Ladoo\Base\Log.cpp" />
     <ClCompile Include="src\Ladoo\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Ladoo\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Ladoo\Layer.cpp" />
-    <ClCompile Include="src\Ladoo\LayerStack.cpp" />
-    <ClCompile Include="src\Ladoo\Log.cpp" />
     <ClCompile Include="src\Ladoo\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Ladoo\Renderer\OrthoCameraController.cpp" />
     <ClCompile Include="src\Ladoo\Renderer\OrthographicCamera.cpp" />

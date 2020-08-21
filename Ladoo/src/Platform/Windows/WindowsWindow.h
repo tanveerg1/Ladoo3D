@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Ladoo/Window.h"
+#include "Ladoo/Base/Window.h"
 #include "Ladoo/Renderer/RendererContext.h"
 
 #include <GLFW/glfw3.h>

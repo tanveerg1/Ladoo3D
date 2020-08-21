@@ -57,17 +57,38 @@
     <ClInclude Include="src\Ladoo.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ladoo\Application.h">
-      <Filter>src\Ladoo</Filter>
+    <ClInclude Include="src\Ladoo\Base\Application.h">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Base\Core.h">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Base\EntryPoint.h">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Base\Input.h">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Base\KeyCodes.h">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Base\Layer.h">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Base\LayerStack.h">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Base\Log.h">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Base\MouseCodes.h">
+      <Filter>src\Ladoo\Base</Filter>
     </ClInclude>
     <ClInclude Include="src\Ladoo\Base\TimeStep.h">
       <Filter>src\Ladoo\Base</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ladoo\Core.h">
-      <Filter>src\Ladoo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ladoo\EntryPoint.h">
-      <Filter>src\Ladoo</Filter>
+    <ClInclude Include="src\Ladoo\Base\Window.h">
+      <Filter>src\Ladoo\Base</Filter>
     </ClInclude>
     <ClInclude Include="src\Ladoo\Events\ApplicationEvent.h">
       <Filter>src\Ladoo\Events</Filter>
@@ -84,25 +105,10 @@
     <ClInclude Include="src\Ladoo\ImGui\ImGuiLayer.h">
       <Filter>src\Ladoo\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ladoo\Input.h">
-      <Filter>src\Ladoo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ladoo\KeyCodes.h">
-      <Filter>src\Ladoo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ladoo\Layer.h">
-      <Filter>src\Ladoo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ladoo\LayerStack.h">
-      <Filter>src\Ladoo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ladoo\Log.h">
-      <Filter>src\Ladoo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ladoo\MouseCodes.h">
-      <Filter>src\Ladoo</Filter>
-    </ClInclude>
     <ClInclude Include="src\Ladoo\Renderer\Buffer.h">
+      <Filter>src\Ladoo\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Renderer\OrthoCameraController.h">
       <Filter>src\Ladoo\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Ladoo\Renderer\OrthographicCamera.h">
@@ -128,9 +134,6 @@
     </ClInclude>
     <ClInclude Include="src\Ladoo\Renderer\VertexArray.h">
       <Filter>src\Ladoo\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ladoo\Window.h">
-      <Filter>src\Ladoo</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1386,11 +1389,19 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ladoo\Renderer\OrthoCameraController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Ladoo\Application.cpp">
-      <Filter>src\Ladoo</Filter>
+    <ClCompile Include="src\Ladoo\Base\Application.cpp">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ladoo\Base\Layer.cpp">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ladoo\Base\LayerStack.cpp">
+      <Filter>src\Ladoo\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ladoo\Base\Log.cpp">
+      <Filter>src\Ladoo\Base</Filter>
     </ClCompile>
     <ClCompile Include="src\Ladoo\ImGui\ImGuiBuild.cpp">
       <Filter>src\Ladoo\ImGui</Filter>
@@ -1398,16 +1409,10 @@
     <ClCompile Include="src\Ladoo\ImGui\ImGuiLayer.cpp">
       <Filter>src\Ladoo\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Ladoo\Layer.cpp">
-      <Filter>src\Ladoo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ladoo\LayerStack.cpp">
-      <Filter>src\Ladoo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ladoo\Log.cpp">
-      <Filter>src\Ladoo</Filter>
-    </ClCompile>
     <ClCompile Include="src\Ladoo\Renderer\Buffer.cpp">
+      <Filter>src\Ladoo\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ladoo\Renderer\OrthoCameraController.cpp">
       <Filter>src\Ladoo\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Ladoo\Renderer\OrthographicCamera.cpp">
@@ -1461,6 +1466,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Ladoo\Renderer\OrthoCameraController.cpp" />
   </ItemGroup>
 </Project>

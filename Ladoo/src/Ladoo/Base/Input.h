@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Ladoo/Core.h"
+#include "Ladoo/Base/Core.h"
 
 namespace Ladoo {
 

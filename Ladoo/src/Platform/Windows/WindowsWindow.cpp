@@ -174,4 +174,6 @@ namespace Ladoo {
 	{
 		return m_Data.VSync;
 	}
+
+
 }
