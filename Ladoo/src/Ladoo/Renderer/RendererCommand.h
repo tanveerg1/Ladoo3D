@@ -32,6 +32,6 @@ namespace Ladoo {
 			s_RendererAPI->DrawElements(vertexArray);
 		}
 	private:
-		static RendererAPI* s_RendererAPI;
+		static Scope<RendererAPI> s_RendererAPI;
 	};
 }

@@ -31,7 +31,7 @@ namespace Ladoo {
 		bool c_Rotation;
 
 		glm::vec3 c_CameraPosition = { 0.0f, 0.0f, 0.0f };
-		float c_CameraRotation = 0.0f;
+		float c_CameraRotation = 0.0f; //anti-clockwise
 		float c_CameraTranslationSpeed = 5.0f, c_CameraRotationSpeed = 180.0f;
 	};
 }

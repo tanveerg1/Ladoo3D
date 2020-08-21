@@ -5,7 +5,7 @@
 
 namespace Ladoo {
 
-	Renderer::SceneData* Renderer::c_SceneData = new Renderer::SceneData;
+	Scope<Renderer::SceneData> Renderer::c_SceneData = CreateScope<Renderer::SceneData>();
 
 	void Renderer::Init()
 	{

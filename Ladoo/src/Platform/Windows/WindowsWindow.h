@@ -29,7 +29,7 @@ namespace Ladoo {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
-		RendererContext* m_Context;
+		Scope<RendererContext> m_Context;
 
 		struct WindowData
 		{

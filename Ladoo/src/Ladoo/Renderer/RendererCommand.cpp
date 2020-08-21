@@ -5,5 +5,5 @@
 
 namespace Ladoo {
 
-	RendererAPI* RendererCommand::s_RendererAPI = new OpenGLRendererAPI;
+	Scope<RendererAPI> RendererCommand::s_RendererAPI = CreateScope<OpenGLRendererAPI>();
 }

@@ -51,7 +51,7 @@ project "Ladoo"
 	filter "system:windows"
 		systemversion "latest"
 
-		defines { "LD_PLATFORM_WINDOWS", "LD_BUILD_DLL", "GLFW_INCLUDE_NONE" }
+		defines { "LD_BUILD_DLL", "GLFW_INCLUDE_NONE" }
 
 	filter "configurations:Debug"
 		defines "LD_DEBUG"
@@ -86,8 +86,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines { "LD_PLATFORM_WINDOWS" }
 
 	filter "configurations:Debug"
 		defines "LD_DEBUG"

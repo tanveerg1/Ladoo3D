@@ -23,7 +23,7 @@ namespace Ladoo {
 			glm::mat4 ViewProjectionMatrix;
 		};
 
-		static SceneData* c_SceneData;
+		static Scope<SceneData> c_SceneData;
 	};
 
 }

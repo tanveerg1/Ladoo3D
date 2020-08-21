@@ -1,12 +1,16 @@
 [submodule "Ladoo/vendor/spdlog"]
 	path = Ladoo/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+	branch = v1.x
 [submodule "Ladoo/vendor/GLFW"]
 	path = Ladoo/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
+	branch = master
 [submodule "Ladoo/vendor/imgui"]
 	path = Ladoo/vendor/imgui
 	url = https://github.com/tanveerg1/imgui
+	branch = docking
 [submodule "Ladoo/vendor/glm"]
 	path = Ladoo/vendor/glm
 	url = https://github.com/g-truc/glm
+	branch = master

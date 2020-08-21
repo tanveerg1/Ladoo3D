@@ -93,6 +93,7 @@ namespace Ladoo {
 			LD_CORE_ASSERT(ShaderTypeFromString(type), "Invalid shader type specified!");
 
 			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
+			LD_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax Error");
 			pos = source.find(typeToken, nextLinePos);
 			shaderSrcs[ShaderTypeFromString(type)] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
 		}
@@ -185,6 +186,7 @@ namespace Ladoo {
 		{
 			// Always detach shaders after a successful link.
 			glDetachShader(program, id);
+			glDeleteShader(id);
 		}
 
 		// Vertex and fragment shaders are successfully compiled.
