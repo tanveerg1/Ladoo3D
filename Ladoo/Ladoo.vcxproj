@@ -157,6 +157,7 @@
     <ClInclude Include="src\Ladoo\Log.h" />
     <ClInclude Include="src\Ladoo\MouseCodes.h" />
     <ClInclude Include="src\Ladoo\Renderer\Buffer.h" />
+    <ClInclude Include="src\Ladoo\Renderer\OrthoCameraController.h" />
     <ClInclude Include="src\Ladoo\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Ladoo\Renderer\Renderer.h" />
     <ClInclude Include="src\Ladoo\Renderer\RendererAPI.h" />
@@ -593,6 +594,7 @@
     <ClCompile Include="src\Ladoo\LayerStack.cpp" />
     <ClCompile Include="src\Ladoo\Log.cpp" />
     <ClCompile Include="src\Ladoo\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Ladoo\Renderer\OrthoCameraController.cpp" />
     <ClCompile Include="src\Ladoo\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Ladoo\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Ladoo\Renderer\RendererAPI.cpp" />

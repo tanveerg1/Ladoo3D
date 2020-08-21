@@ -19,6 +19,7 @@
 
 // Camera
 #include "Ladoo/Renderer/OrthographicCamera.h"
+#include "Ladoo/Renderer/OrthoCameraController.h"
 // ---------------------------------------
 
 // Buffer and stuff
