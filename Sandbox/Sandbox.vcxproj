@@ -131,12 +131,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\SandboxApp.cpp" />
+    <ClCompile Include="src\Ladoo2D.cpp" />
+    <ClCompile Include="src\LadooApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ladoo\Ladoo.vcxproj">
       <Project>{542F950D-C043-BDBE-89C5-601EF598B9EF}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Ladoo2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

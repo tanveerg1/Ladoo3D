@@ -2,6 +2,8 @@
 
 // For use by Ladoo application
 
+#include "Ladoo/Base/Core.h"
+
 #include "Ladoo/Base/Application.h"
 #include "Ladoo/Base/Layer.h"
 #include "Ladoo/Base/Log.h"
@@ -14,6 +16,7 @@
 
 // Renderer
 #include "Ladoo/Renderer/Renderer.h"
+#include "Ladoo/Renderer/Renderer2D.h"
 #include "Ladoo/Renderer/RendererCommand.h"
 //---------------------------------------
 
@@ -30,5 +33,5 @@
 //----------------------------------------
 
 // ------Entry Point----------------------
-#include "Ladoo/Base/EntryPoint.h"
+//#include "Ladoo/Base/EntryPoint.h"
 // ---------------------------------------

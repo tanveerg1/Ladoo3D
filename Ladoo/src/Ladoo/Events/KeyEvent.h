@@ -4,7 +4,7 @@
 
 namespace Ladoo {
 
-	class  KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
@@ -17,7 +17,7 @@ namespace Ladoo {
 		int m_KeyCode;
 	};
 
-	class  KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount) 
@@ -37,7 +37,7 @@ namespace Ladoo {
 		int m_RepeatCount;
 	};
 
-	class  KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode) 
@@ -53,7 +53,7 @@ namespace Ladoo {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class  KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)

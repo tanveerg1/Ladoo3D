@@ -1,12 +1,11 @@
 #include "ldpch.h"
-#include "VertexArray.h"
+#include "RendererContext.h"
 
 #include "Renderer.h"
-#include "Platform/OpenGL/OpenGLVertexArray.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Ladoo {
-
-	Ref<VertexArray> VertexArray::Create()
+	Scope<RendererContext> RendererContext::Create(void* window)
 	{
 		switch (Renderer::GetCurrentAPI())
 		{
@@ -15,7 +14,7 @@ namespace Ladoo {
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 
-			return CreateRef<OpenGLVertexArray>();
+			return CreateScope<OpenGLContext>(static_cast<GLFWwindow*>(window));
 		}
 
 		LD_CORE_ASSERT(false, "Unknown RendererAPI");

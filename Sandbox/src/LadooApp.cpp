@@ -1,11 +1,12 @@
 #include <Ladoo.h>
-
-#include "Platform/OpenGL/OpenGLShader.h"
+#include <Ladoo/Base/EntryPoint.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "imgui/imgui.h"
+#include <imgui/imgui.h>
+
+#include "Ladoo2D.h"
 
 class ExampleLayer : public Ladoo::Layer 
 {
@@ -13,7 +14,7 @@ public:
 	ExampleLayer()
 		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
-		m_VertexArray.reset(Ladoo::VertexArray::Create());
+		m_VertexArray = Ladoo::VertexArray::Create();
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
@@ -22,7 +23,7 @@ public:
 		};
 
 		Ladoo::Ref<Ladoo::VertexBuffer> m_VertexBuffer;
-		m_VertexBuffer.reset(Ladoo::VertexBuffer::Create(vertices, sizeof(vertices)));
+		m_VertexBuffer = Ladoo::VertexBuffer::Create(vertices, sizeof(vertices));
 
 		Ladoo::BufferLayout layout = {
 		{ Ladoo::ShaderDataType::Float3, "a_Position"},
@@ -35,11 +36,11 @@ public:
 
 		uint32_t indices[3] = { 0, 1, 2 };
 		Ladoo::Ref<Ladoo::IndexBuffer> m_IndexBuffer;
-		m_IndexBuffer.reset(Ladoo::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		m_IndexBuffer = Ladoo::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 
 		m_VertexArray->AddIndexBuffer(m_IndexBuffer);
 
-		sq_VertexArray.reset(Ladoo::VertexArray::Create());
+		sq_VertexArray = Ladoo::VertexArray::Create();
 		float sqVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
@@ -47,7 +48,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
 		};
 		Ladoo::Ref<Ladoo::VertexBuffer> squareVB;
-		squareVB.reset(Ladoo::VertexBuffer::Create(sqVertices, sizeof(sqVertices)));
+		squareVB = Ladoo::VertexBuffer::Create(sqVertices, sizeof(sqVertices));
 		squareVB->SetLayout({
 			{ Ladoo::ShaderDataType::Float3, "a_Position"},
 			{ Ladoo::ShaderDataType::Float2, "a_TextureCoord"},
@@ -56,7 +57,7 @@ public:
 
 		uint32_t sq_Indices[6] = { 0, 1, 2, 2, 3, 0 };
 		Ladoo::Ref<Ladoo::IndexBuffer> squareIB;
-		squareIB.reset(Ladoo::IndexBuffer::Create(sq_Indices, sizeof(sq_Indices) / sizeof(uint32_t)));
+		squareIB = Ladoo::IndexBuffer::Create(sq_Indices, sizeof(sq_Indices) / sizeof(uint32_t));
 
 		sq_VertexArray->AddIndexBuffer(squareIB);
 
@@ -135,11 +136,11 @@ public:
 
 		auto texture_Shader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
-		m_Texture = (Ladoo::Texture2D::Create("assets/textures/Checkerboard.png"));
-		m_TestTexture = (Ladoo::Texture2D::Create("assets/textures/ChernoLogo.png"));
+		m_Texture = Ladoo::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_TestTexture = Ladoo::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<Ladoo::OpenGLShader>(texture_Shader)->Bind();
-		std::dynamic_pointer_cast<Ladoo::OpenGLShader>(texture_Shader)->UploadUniformInt("u_Texture", 0);
+		texture_Shader->Bind();
+		texture_Shader->SetInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Ladoo::TimeStep timeStep) override
@@ -155,8 +156,11 @@ public:
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		std::dynamic_pointer_cast<Ladoo::OpenGLShader>(flatColour_Shader)->Bind();
-		std::dynamic_pointer_cast<Ladoo::OpenGLShader>(flatColour_Shader)->UploadUniformFloat3("u_Colour", m_SquareColour);
+		flatColour_Shader->Bind();
+		flatColour_Shader->SetFloat3("u_Colour", m_SquareColour);
+
+		// old code deleted the others kept this as a sample
+		//std::dynamic_pointer_cast<Ladoo::OpenGLShader>(flatColour_Shader)->UploadUniformFloat3("u_Colour", m_SquareColour);
 
 		for (int y = 0; y < 20; y++)
 		{
@@ -216,7 +220,8 @@ class Sandbox : public Ladoo::Application
 public: 
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
+		PushLayer(new Ladoo2D());
 	}
 
 	~Sandbox()

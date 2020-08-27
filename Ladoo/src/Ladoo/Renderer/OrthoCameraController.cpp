@@ -15,20 +15,28 @@ namespace Ladoo {
 	{
 		if (Input::IsKeyPressed(LD_KEY_A))
 		{
-			c_CameraPosition.x -= c_CameraTranslationSpeed * timeStep;
+			//c_CameraPosition.x -= c_CameraTranslationSpeed * timeStep;
+			c_CameraPosition.x -= cos(glm::radians(c_CameraRotation)) * c_CameraTranslationSpeed * timeStep;
+			c_CameraPosition.y -= sin(glm::radians(c_CameraRotation)) * c_CameraTranslationSpeed * timeStep;
 		}
 		else if (Input::IsKeyPressed(LD_KEY_D))
 		{
-			c_CameraPosition.x += c_CameraTranslationSpeed * timeStep;
+			//c_CameraPosition.x += c_CameraTranslationSpeed * timeStep;
+			c_CameraPosition.x += cos(glm::radians(c_CameraRotation)) * c_CameraTranslationSpeed * timeStep;
+			c_CameraPosition.y += sin(glm::radians(c_CameraRotation)) * c_CameraTranslationSpeed * timeStep;
 		}
 
 		if (Input::IsKeyPressed(LD_KEY_W))
 		{
-			c_CameraPosition.y += c_CameraTranslationSpeed * timeStep;
+			//c_CameraPosition.y += c_CameraTranslationSpeed * timeStep;
+			c_CameraPosition.x += -sin(glm::radians(c_CameraRotation)) * c_CameraTranslationSpeed * timeStep;
+			c_CameraPosition.y += cos(glm::radians(c_CameraRotation)) * c_CameraTranslationSpeed * timeStep;
 		}
 		else if (Input::IsKeyPressed(LD_KEY_S))
 		{
-			c_CameraPosition.y -= c_CameraTranslationSpeed * timeStep;
+			//c_CameraPosition.y -= c_CameraTranslationSpeed * timeStep;
+			c_CameraPosition.x -= -sin(glm::radians(c_CameraRotation)) * c_CameraTranslationSpeed * timeStep;
+			c_CameraPosition.y -= cos(glm::radians(c_CameraRotation)) * c_CameraTranslationSpeed * timeStep;
 		}
 
 		if (c_Rotation)
@@ -41,6 +49,16 @@ namespace Ladoo {
 			{
 				c_CameraRotation -= c_CameraRotationSpeed * timeStep;
 			}
+
+			if (c_CameraRotation > 180.0f)
+			{
+				c_CameraRotation -= 360.0f;
+			}
+			else if (c_CameraRotation <= -180.0f)
+			{
+				c_CameraRotation += 360.0f;
+			}
+
 			camera.SetRotation(c_CameraRotation);
 		}
 		

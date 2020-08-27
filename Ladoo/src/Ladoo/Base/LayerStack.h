@@ -7,7 +7,7 @@
 
 namespace Ladoo {
 
-	class  LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();

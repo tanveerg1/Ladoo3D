@@ -9,27 +9,27 @@ namespace Ladoo {
 	{
 		switch (type)
 		{
-			case Ladoo::ShaderDataType::Float:
+			case ShaderDataType::Float:
 				return GL_FLOAT;
-			case Ladoo::ShaderDataType::Float2:
+			case ShaderDataType::Float2:
 				return GL_FLOAT;
-			case Ladoo::ShaderDataType::Float3:
+			case ShaderDataType::Float3:
 				return GL_FLOAT;
-			case Ladoo::ShaderDataType::Float4:
+			case ShaderDataType::Float4:
 				return GL_FLOAT;
-			case Ladoo::ShaderDataType::Mat3:
+			case ShaderDataType::Mat3:
 				return GL_FLOAT;
-			case Ladoo::ShaderDataType::Mat4:
+			case ShaderDataType::Mat4:
 				return GL_FLOAT;
-			case Ladoo::ShaderDataType::Int:
+			case ShaderDataType::Int:
 				return GL_INT;
-			case Ladoo::ShaderDataType::Int2:
+			case ShaderDataType::Int2:
 				return GL_INT;
-			case Ladoo::ShaderDataType::Int3:
+			case ShaderDataType::Int3:
 				return GL_INT;
-			case Ladoo::ShaderDataType::Int4:
+			case ShaderDataType::Int4:
 				return GL_INT;
-			case Ladoo::ShaderDataType::Bool:
+			case ShaderDataType::Bool:
 				return GL_BOOL;
 			}
 
@@ -57,7 +57,7 @@ namespace Ladoo {
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const Ladoo::Ref<VertexBuffer>& vertexBuffer)
+	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
 		LD_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex buffer has no layout");
 
@@ -77,7 +77,7 @@ namespace Ladoo {
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
-	void OpenGLVertexArray::AddIndexBuffer(const Ladoo::Ref<IndexBuffer>& indexBuffer)
+	void OpenGLVertexArray::AddIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
