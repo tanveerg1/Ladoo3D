@@ -4,8 +4,8 @@
 #include <imgui.h>
 
 //#define IMGUI_IMPL_API
-#include <examples/imgui_impl_opengl3.h>
 #include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
 
 #include "Ladoo/Base/Application.h"
 
@@ -15,11 +15,8 @@
 
 namespace Ladoo {
 
-	ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
-	{
-	}
-
-	ImGuiLayer::~ImGuiLayer()
+	ImGuiLayer::ImGuiLayer() 
+		: Layer("ImGuiLayer")
 	{
 	}
 
@@ -87,13 +84,4 @@ namespace Ladoo {
 			glfwMakeContextCurrent(backup_current_context);
 		}
 	}
-
-	void ImGuiLayer::OnImGuiRender()
-	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-	}
-
-
-	
 }

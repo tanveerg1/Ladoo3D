@@ -152,6 +152,7 @@
     <ClInclude Include="src\Ladoo\Base\MouseCodes.h" />
     <ClInclude Include="src\Ladoo\Base\TimeStep.h" />
     <ClInclude Include="src\Ladoo\Base\Window.h" />
+    <ClInclude Include="src\Ladoo\Debug\Instrumentor.h" />
     <ClInclude Include="src\Ladoo\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Ladoo\Events\Event.h" />
     <ClInclude Include="src\Ladoo\Events\KeyEvent.h" />
@@ -632,4 +633,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project>
+</Project> 

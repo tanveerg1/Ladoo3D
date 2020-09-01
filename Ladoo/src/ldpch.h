@@ -13,6 +13,7 @@
 #include <unordered_map>
 
 #include "Ladoo/Base/Log.h"
+#include "Ladoo/Debug/Instrumentor.h"
 
 #ifdef LD_PLATFORM_WINDOWS
 	#include <Windows.h>

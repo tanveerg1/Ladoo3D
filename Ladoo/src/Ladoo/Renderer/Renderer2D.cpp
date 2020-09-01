@@ -79,26 +79,66 @@ namespace Ladoo {
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& colour)
 	{
 		data->TextureShader->SetFloat4("u_Colour", colour);
+		data->TextureShader->SetFloat("u_Tiling", 1.0f);
 		data->WhiteTexture->Bind();
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * /*glm::rotate(glm::mat4(1.0f), glm::radians(10.0f), glm::vec3(0, 0, 1)) **/ glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f }); /*glm::rotate(glm::mat4(1.0f), glm::radians(10.0f), glm::vec3(0, 0, 1)) **/
 		data->TextureShader->SetMat4("u_Transform", transform);
 
 		data->QuadVertexArray->Bind();
 		RendererCommand::DrawElements(data->QuadVertexArray);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColour)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
+		DrawQuad({ position.x, position.y, 0.0f }, size, texture, tilingFactor, tintColour);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColour)
 	{
-		data->TextureShader->SetFloat4("u_Colour", glm::vec4(1.0f)); // For tinting add { 0.2f, 0.3f, 0.8f, 0.5f } and remove glm::vec4(1.0f)
+		data->TextureShader->SetFloat4("u_Colour", tintColour); // For tinting add { 0.2f, 0.3f, 0.8f, 0.5f } and remove glm::vec4(1.0f)
+		data->TextureShader->SetFloat("u_Tiling", tilingFactor);
 		texture->Bind();
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+		data->TextureShader->SetMat4("u_Transform", transform);
+
+		data->QuadVertexArray->Bind();
+		RendererCommand::DrawElements(data->QuadVertexArray);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& colour)
+	{
+		DrawRotatedQuad({ position.x, position.y, 0.0f }, size, rotation,colour);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& colour)
+	{
+		data->TextureShader->SetFloat4("u_Colour", colour);
+		data->TextureShader->SetFloat("u_Tiling", 1.0f);
+		data->WhiteTexture->Bind();
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) 
+			* glm::rotate(glm::mat4(1.0f), rotation, { 0.0f, 0.0f, 1.0f })
+			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+		data->TextureShader->SetMat4("u_Transform", transform);
+
+		data->QuadVertexArray->Bind();
+		RendererCommand::DrawElements(data->QuadVertexArray);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColour)
+	{
+		DrawRotatedQuad({ position.x, position.y, 0.0f }, size, rotation, texture, tilingFactor, tintColour);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColour)
+	{
+		data->TextureShader->SetFloat4("u_Colour", tintColour);
+		data->TextureShader->SetFloat("u_Tiling", tilingFactor);
+		texture->Bind();
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), rotation, { 0.0f, 0.0f, 1.0f }) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 		data->TextureShader->SetMat4("u_Transform", transform);
 
 		data->QuadVertexArray->Bind();

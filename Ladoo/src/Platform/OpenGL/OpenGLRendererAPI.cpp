@@ -5,8 +5,40 @@
 
 namespace Ladoo {
 	
+	void OpenGLDebugCallback(unsigned source, unsigned type, unsigned id, unsigned severity, int length, const char* message, const void* userParam)
+	{
+		switch (severity)
+		{
+		case GL_DEBUG_SEVERITY_HIGH:
+			LD_CORE_FATAL(message);
+			return;
+		case GL_DEBUG_SEVERITY_MEDIUM:
+			LD_CORE_ERROR(message);
+			return;
+		case GL_DEBUG_SEVERITY_LOW:
+			LD_CORE_WARN(message);
+			return;
+		case GL_DEBUG_SEVERITY_NOTIFICATION:
+			LD_CORE_TRACE(message);
+			return;
+		}
+
+		LD_CORE_ASSERT(false, "Unknown severity level");
+
+	}
+
 	void OpenGLRendererAPI::Init()
 	{
+		LD_PROFILE_FUNCTION();
+
+#ifdef LD_DEBUG
+		glEnable(GL_DEBUG_OUTPUT);
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(OpenGLDebugCallback, nullptr);
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE);
+#endif
+
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

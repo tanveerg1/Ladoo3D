@@ -6,6 +6,8 @@
 #include "Ladoo/Events/MouseEvent.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
+#include "Ladoo/Renderer/Renderer.h"
+
 namespace Ladoo {
 
 	// remove it after testing = if(!s_GLFWInitialized)
@@ -35,6 +37,8 @@ namespace Ladoo {
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		LD_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -51,6 +55,13 @@ namespace Ladoo {
 			// to remove after
 			//s_GLFWInitialized = true;
 		}
+
+#ifdef defined(LD_DEBUG)
+		if (Renderer::GetCurrentAPI() == RendererAPI::API::OpenGL)
+		{
+			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+		}
+#endif // defined(LD_DEBUG)
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWWindowCount;

@@ -5,6 +5,7 @@ bin-int/
 
 # Files
 *.user
+*.log
 
 # VS Files and Folders
 .vs/

@@ -11,11 +11,10 @@ namespace Ladoo {
 	{
 	public:
 		ImGuiLayer();
-		~ImGuiLayer();
+		~ImGuiLayer() = default;
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
-		void OnImGuiRender() override;
 
 		void Begin();
 		void End();

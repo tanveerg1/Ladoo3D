@@ -26,11 +26,11 @@ namespace Ladoo {
 #define LD_CORE_INFO(...)    ::Ladoo::Log::GetCoreLogger()->info(__VA_ARGS__)
 #define LD_CORE_ERROR(...)   ::Ladoo::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define LD_CORE_WARN(...)    ::Ladoo::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define LD_CORE_FATAL(...)   ::Ladoo::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+#define LD_CORE_FATAL(...)   ::Ladoo::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client log macros
 #define LD_TRACE(...)        ::Ladoo::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define LD_INFO(...)         ::Ladoo::Log::GetClientLogger()->info(__VA_ARGS__)
 #define LD_ERROR(...)        ::Ladoo::Log::GetClientLogger()->error(__VA_ARGS__)
 #define LD_WARN(...)         ::Ladoo::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define LD_FATAL(...)        ::Ladoo::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define LD_FATAL(...)        ::Ladoo::Log::GetClientLogger()->critical(__VA_ARGS__)

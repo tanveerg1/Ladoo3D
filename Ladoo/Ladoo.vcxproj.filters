@@ -10,6 +10,9 @@
     <Filter Include="src\Ladoo\Base">
       <UniqueIdentifier>{15DD9A73-01AB-8E79-EA3E-FF9FD6AB6ADE}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Ladoo\Debug">
+      <UniqueIdentifier>{619C1CE7-CD27-8AAB-D638-0DA04243E6AB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Ladoo\Events">
       <UniqueIdentifier>{2F7B3ACE-1B74-5920-44A6-3EA530FE382C}</UniqueIdentifier>
     </Filter>
@@ -90,6 +93,9 @@
     <ClInclude Include="src\Ladoo\Base\Window.h">
       <Filter>src\Ladoo\Base</Filter>
     </ClInclude>
+    <ClInclude Include="src\Ladoo\Debug\Instrumentor.h">
+      <Filter>src\Ladoo\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\Ladoo\Events\ApplicationEvent.h">
       <Filter>src\Ladoo\Events</Filter>
     </ClInclude>
@@ -115,6 +121,9 @@
       <Filter>src\Ladoo\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Ladoo\Renderer\Renderer.h">
+      <Filter>src\Ladoo\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ladoo\Renderer\Renderer2D.h">
       <Filter>src\Ladoo\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Ladoo\Renderer\RendererAPI.h">
@@ -1389,7 +1398,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ladoo\Renderer\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ladoo\Base\Application.cpp">
@@ -1422,10 +1430,16 @@
     <ClCompile Include="src\Ladoo\Renderer\Renderer.cpp">
       <Filter>src\Ladoo\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Ladoo\Renderer\Renderer2D.cpp">
+      <Filter>src\Ladoo\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Ladoo\Renderer\RendererAPI.cpp">
       <Filter>src\Ladoo\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Ladoo\Renderer\RendererCommand.cpp">
+      <Filter>src\Ladoo\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ladoo\Renderer\RendererContext.cpp">
       <Filter>src\Ladoo\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Ladoo\Renderer\Shader.cpp">
@@ -1467,7 +1481,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Ladoo\Renderer\Renderer2D.cpp" />
-    <ClCompile Include="src\Ladoo\Renderer\RendererContext.cpp" />
   </ItemGroup>
 </Project>

@@ -22,9 +22,10 @@ layout(location = 0) out vec4 f_Colour;
 in vec2 v_TextureCoord;
 
 uniform vec4 u_Colour;
+uniform float u_Tiling;
 uniform sampler2D u_Texture;
 
 void main()
 {
-	f_Colour = texture(u_Texture, v_TextureCoord * 10.0) * u_Colour;
+	f_Colour = texture(u_Texture, v_TextureCoord * u_Tiling) * u_Colour;
 }

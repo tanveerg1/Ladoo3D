@@ -2,9 +2,6 @@
 #include "LayerStack.h"
 
 namespace Ladoo {
-	LayerStack::LayerStack()
-	{
-	}
 
 	LayerStack::~LayerStack()
 	{
